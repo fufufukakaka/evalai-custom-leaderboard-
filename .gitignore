@@ -4,3 +4,5 @@ bundle.js
 yarn.lock
 package-lock.json
 .vscode/
+*.mov
+images/*.png
