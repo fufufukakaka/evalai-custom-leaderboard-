@@ -1,6 +1,6 @@
 # EvalAI-Custom-LeaderBoard
 
-This repository builds a leaderboard that complements ![EvalAI](https://github.com/Cloud-CV/EvalAI).
+This repository builds a leaderboard that complements [EvalAI](!https://github.com/Cloud-CV/EvalAI).
 
 (This repository is for practice. If you use it, please check the code, modify the code accordingly, and use it at your own responsibility.)
 
