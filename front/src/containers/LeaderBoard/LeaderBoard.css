@@ -1,0 +1,24 @@
+.container {
+  margin-top: 30px;
+  width: 95%;
+}
+
+.headerContainer {
+  display: flex;
+}
+
+.leaderBoardContainer {
+  margin-top: 30px;
+}
+
+.tabContainer {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.lineContainer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 26px;
+}
