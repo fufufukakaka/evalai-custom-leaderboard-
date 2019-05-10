@@ -43,7 +43,7 @@ def fetch_leader_board():
         on p.id = ps.challenge_phase_id\
         inner join leaderboard as l\
         on ps.leaderboard_id = l.id\
-        where c.published = TRUE"
+        where c.published = TRUE and s.status != 'failed'"
     cur.execute(sql)
     rows = cur.fetchall()
     colnames = [desc[0] for desc in cur.description]
@@ -57,9 +57,10 @@ def fetch_leader_board():
 
         # outputについてはキーを使って値を取り出しておく
         keys = tmp_result["codename"]
-        tmp_result["extract_output"] = json.loads(
-            tmp_result["output"].replace(
-                "'", '"'))["result"][0][keys]
+        if tmp_result["output"] is not None:
+            tmp_result["extract_output"] = json.loads(
+                tmp_result["output"].replace(
+                    "'", '"'))["result"][0][keys]
 
         # schemaからlabel情報を獲得する
         tmp_result["extract_schema"] = tmp_result["schema"]["labels"]
