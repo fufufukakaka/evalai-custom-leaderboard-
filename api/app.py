@@ -66,9 +66,9 @@ def fetch_leader_board():
         tmp_result["default_metrics"] = tmp_result["schema"]["default_order_by"]
         tmp_result["main_score"] = tmp_result["extract_output"][tmp_result
                                                                 ["default_metrics"]]
-        if tmp_result["method_description"] is not None
-        tmp_result["method_description"] = tmp_result["method_description"].replace(
-            "\n", "<br />")
+        if tmp_result["method_description"] is not None:
+            tmp_result["method_description"] = tmp_result["method_description"].replace(
+                "\n", "<br />")
         result.append(tmp_result)
 
     return result
