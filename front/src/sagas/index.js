@@ -3,4 +3,5 @@ import * as LeaderBoard from './leaderboardSaga'
 
 export default function* rootSaga() {
   yield fork(LeaderBoard.runFetchLeaderBoardHandler)
+  yield fork(LeaderBoard.runFetchCompetitionsHandler)
 }

@@ -12,6 +12,10 @@ export const FETCH_LEADERBOARD = createAction(`${BASE_ACTION_NAME}/fetch_leaderb
 export const FETCH_LEADERBOARD_SUCCESS = createAction(`${BASE_ACTION_NAME}/fetch_leaderboard/success`)
 export const FETCH_LEADERBOARD_FAILURE = createAction(`${BASE_ACTION_NAME}/fetch_leaderboard/failure`)
 
+export const FETCH_COMPETITIONS = createAction(`${BASE_ACTION_NAME}/fetch_competitions`)
+export const FETCH_COMPETITIONS_SUCCESS = createAction(`${BASE_ACTION_NAME}/fetch_competitions/success`)
+export const FETCH_COMPETITIONS_FAILURE = createAction(`${BASE_ACTION_NAME}/fetch_competitions/failure`)
+
 export const ACTIVE_COMPETITION = createAction(`${BASE_ACTION_NAME}/active_competition`)
 export const ACTIVE_METRICS = createAction(`${BASE_ACTION_NAME}/active_metrics`)
 export const SET_SEARCH_USER = createAction(`${BASE_ACTION_NAME}/set_search_user`)
@@ -42,7 +46,11 @@ export default handleActions(
     }),
     [FETCH_LEADERBOARD_SUCCESS]: (state, action) => ({
       ...state,
-      leaderBoardData: action.payload,
+      leaderBoardData: action.payload
+      // TODO: leaderboard情報とは別に、competition情報を取得するactionを新たに作るべき
+    }),
+    [FETCH_COMPETITIONS_SUCCESS]: (state, action) => ({
+      ...state,
       competitions: [...new Set(action.payload.map(element => element.title))],
       activeCompetition: [...new Set(action.payload.map(element => element.title))][0],
       activeMetrics: [...new Set(action.payload.map(element => element.codename))][0]

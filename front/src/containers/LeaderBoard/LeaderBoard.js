@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import * as styles from './LeaderBoard.css'
 import {
   FETCH_LEADERBOARD,
+  FETCH_COMPETITIONS,
   ACTIVE_COMPETITION,
   ACTIVE_METRICS,
   SET_SEARCH_USER,
@@ -31,8 +32,13 @@ class LeaderBoard extends PureComponent {
   setSearchUser(selectedOption) {
     this.props.setSearchUser(selectedOption ? selectedOption.value : '')
   }
+  async asyncFetchData() {
+    await this.props.fetchCompetitions()
+    await this.props.fetchLeaderBoard()
+    return 'done'
+  }
   componentDidMount() {
-    this.props.fetchLeaderBoard()
+    this.asyncFetchData()
   }
   render() {
     const {
@@ -49,32 +55,34 @@ class LeaderBoard extends PureComponent {
           <div className={styles.headerContainer}>
             <h2>EvalAI-Custom-LeaderBoard</h2>
           </div>
-          {this.props.competitions ? (
+          {competitions ? (
             <CompetitionNav
               competitionList={competitions}
               activeCompetition={activeCompetition}
               toggleCompetition={e => this.toggleCompetition(e)}
             />
           ) : null}
-          {searchUser === '' ? (
-            competitions ? (
+          {leaderBoardData ? (
+            searchUser === '' ? (
+              competitions ? (
+                <ScoreChart
+                  activeCompetition={activeCompetition}
+                  activeMetrics={activeMetrics}
+                  leaderBoardData={leaderBoardData}
+                  searchUser={searchUser}
+                  eachMember={false}
+                />
+              ) : null
+            ) : (
               <ScoreChart
                 activeCompetition={activeCompetition}
                 activeMetrics={activeMetrics}
                 leaderBoardData={leaderBoardData}
                 searchUser={searchUser}
-                eachMember={false}
+                eachMember={true}
               />
-            ) : null
-          ) : (
-            <ScoreChart
-              activeCompetition={activeCompetition}
-              activeMetrics={activeMetrics}
-              leaderBoardData={leaderBoardData}
-              searchUser={searchUser}
-              eachMember={true}
-            />
-          )}
+            )
+          ) : null}
           <div className={styles.leaderBoardContainer}>
             {competitions ? (
               <BoardTab
@@ -98,6 +106,7 @@ class LeaderBoard extends PureComponent {
 
 LeaderBoard.propTypes = {
   fetchLeaderBoard: PropTypes.func.isRequired,
+  fetchCompetitions: PropTypes.func.isRequired,
   changeActiveCompetition: PropTypes.func.isRequired,
   changeActiveMetrics: PropTypes.func.isRequired,
   setSearchUser: PropTypes.func.isRequired,
@@ -122,6 +131,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => ({
   fetchLeaderBoard: () => dispatch(FETCH_LEADERBOARD()),
+  fetchCompetitions: () => dispatch(FETCH_COMPETITIONS()),
   changeActiveCompetition: competition => dispatch(ACTIVE_COMPETITION(competition)),
   changeActiveMetrics: metrics => dispatch(ACTIVE_METRICS(metrics)),
   setSearchUser: searchUser => dispatch(SET_SEARCH_USER(searchUser)),
