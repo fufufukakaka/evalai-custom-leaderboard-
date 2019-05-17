@@ -30,6 +30,7 @@ const initialState = {
   activeMetrics: '',
   scoreSortAscending: false,
   leaderBoardData: null,
+  competitionInfo: null,
   competitions: null
 }
 
@@ -42,15 +43,16 @@ export default handleActions(
       activeMetrics: '',
       scoreSortAscending: false,
       leaderBoardData: null,
+      competitionInfo: null,
       competitions: null
     }),
     [FETCH_LEADERBOARD_SUCCESS]: (state, action) => ({
       ...state,
       leaderBoardData: action.payload
-      // TODO: leaderboard情報とは別に、competition情報を取得するactionを新たに作るべき
     }),
     [FETCH_COMPETITIONS_SUCCESS]: (state, action) => ({
       ...state,
+      competitionInfo: action.payload,
       competitions: [...new Set(action.payload.map(element => element.title))],
       activeCompetition: [...new Set(action.payload.map(element => element.title))][0],
       activeMetrics: [...new Set(action.payload.map(element => element.codename))][0]

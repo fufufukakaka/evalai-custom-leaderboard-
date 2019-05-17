@@ -47,16 +47,22 @@ class LeaderBoard extends PureComponent {
       activeMetrics,
       leaderBoardData,
       competitions,
-      scoreSortAscending
+      scoreSortAscending,
+      competitionInfo
     } = this.props
     return (
       <div>
         <Container className={styles.container}>
           <div className={styles.headerContainer}>
             <h2>EvalAI-Custom-LeaderBoard</h2>
+            <p>
+              <i className={`fas fa-bolt fa-fw ${styles.isOnGoing}`} /> ... OnGoing Competition,{' '}
+              <i className={`fas fa-history fa-fw ${styles.isPast}`} /> ... Past Competition
+            </p>
           </div>
           {competitions ? (
             <CompetitionNav
+              competitionInfo={competitionInfo}
               competitionList={competitions}
               activeCompetition={activeCompetition}
               toggleCompetition={e => this.toggleCompetition(e)}
@@ -116,13 +122,15 @@ LeaderBoard.propTypes = {
   activeCompetition: PropTypes.string,
   activeMetrics: PropTypes.string,
   leaderBoardData: PropTypes.array,
-  competitions: PropTypes.array
+  competitions: PropTypes.array,
+  competitionInfo: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
     searchUser: state.leaderBoard.searchUser,
     leaderBoardData: state.leaderBoard.leaderBoardData,
+    competitionInfo: state.leaderBoard.competitionInfo,
     competitions: state.leaderBoard.competitions,
     scoreSortAscending: state.leaderBoard.scoreSortAscending,
     activeCompetition: state.leaderBoard.activeCompetition,

@@ -7,6 +7,19 @@
   display: flex;
 }
 
+.headerContainer p {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.isOnGoing {
+  color: #ff9800;
+}
+
+.isPast {
+  color: #4caf50;
+}
+
 .leaderBoardContainer {
   margin-top: 30px;
 }
