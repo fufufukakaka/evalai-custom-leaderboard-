@@ -73,7 +73,7 @@ const BoardTable: React.FunctionComponent<BoardTableProps> = ({
           {element.project_url === '' ? (
             'None'
           ) : (
-            <a href={element.project_url}>
+            <a href={element.project_url} target="_blank" rel="noopener">
               <i className="fas fa-book fa-fw" />
             </a>
           )}
