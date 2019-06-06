@@ -70,9 +70,13 @@ const BoardTable: React.FunctionComponent<BoardTableProps> = ({
           ) : null}
         </td>
         <td>
-          <a href={element.project_rul}>
-            <i className="fas fa-book fa-fw" />
-          </a>
+          {element.project_url === '' ? (
+            'None'
+          ) : (
+            <a href={element.project_url}>
+              <i className="fas fa-book fa-fw" />
+            </a>
+          )}
         </td>
         <td>{element.submission_number}</td>
         <td>{Moment(element.submitted_at).format('YYYY/MM/DD HH:MM:SS')}</td>
